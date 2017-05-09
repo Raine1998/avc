@@ -6,7 +6,8 @@
 
 int lineWhiteThreshold = 127;
 int minWhiteToSeeLine = 12800;
-double kp = 0.5; //Will need to adjust this
+float kp = 0.5; //Will need to adjust this
+int loopDelay = 500000;
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
@@ -65,6 +66,15 @@ bool canSeeLine() {
 	else return false;
 }
 
+void reverseUntilSeeLine() {
+	setSpeed(-100, -100);
+	while (!canSeeLine()) {
+		take_picture();
+		sleep1(0, loopDelay);
+	}
+	setSpeed(0, 0);
+}
+
 //=======================Quadrant One=======================
 
 void quadOneLoop() {
@@ -79,7 +89,9 @@ void quadOneLoop() {
 			setSpeed(127 + errorSignal*kp, 127 - errorSignal*kp);
 		} else {
 			//Robot is not on track	
+			reverseUntilSeeLine();
 		}
+		sleep1(0, loopDelay);
 	}
 }
 
@@ -100,25 +112,16 @@ int image_analysis() {
     w = get_pixel(i, 120, 3);
     if (w > 127) {
       s = 1;
-    };
+    }
     else {
       s = 0;
-    };
+    }
     sum = sum + (i - 160) * s;
-  };
+  }
   proportional_signal = sum * kp;
-};
-
-int get_ir_reading() {
-  int avg = 0;
-  for (int i = 0; i < 5; i++) {
-    avg = avg + get_adc_reading(ir_sensor_1);
-  };
-  return(avg / 5);
-};
+}
 
 int main() {
   init();
-  updateWhiteThreshold();
   quadOneLoop();
-};
+}
