@@ -119,10 +119,6 @@ int get_ir_reading() {
 
 int main() {
   init();
-<<<<<<< HEAD
   updateWhiteThreshold();
-};
-=======
   quadOneLoop();
-}
->>>>>>> d4eac23b005b8e8b468d939f269322edd7ea6d28
+};
