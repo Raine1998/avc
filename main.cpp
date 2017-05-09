@@ -6,6 +6,7 @@
 
 int lineWhiteThreshold = 127;
 int minWhiteToSeeLine = 12800;
+double kp = 0.5; //Will need to adjust this
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
@@ -44,6 +45,7 @@ double getLineErrorSignal(int rowStart, int rowEnd) {
 	return (double) error / (rowEnd - rowStart + 1);
 }
 
+//Returns number of white pixels in image. Call take picture first.
 int numWhiteInImg() {
 	int numWhite;
 	for (int r = 0; r < 240; r++) {
@@ -64,6 +66,22 @@ bool canSeeLine() {
 }
 
 //=======================Quadrant One=======================
+
+void quadOneLoop() {
+	updateWhiteThreshold();
+	bool active = true;
+	double errorSignal;
+	while(active) {
+		take_picture();	
+		if (canSeeLine()) {
+			//Robot is on track	
+			errorSignal = getLineErrorSignal(110, 130);
+			setSpeed(127 + errorSignal*kp, 127 - errorSignal*kp);
+		} else {
+			//Robot is not on track	
+		}
+	}
+}
 
 //=======================Quadrant Two=======================
 
@@ -93,5 +111,5 @@ int image_analysis() {
 
 int main() {
   init();
-  updateWhiteThreshold();
+  quadOneLoop();
 }
