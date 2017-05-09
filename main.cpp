@@ -5,6 +5,8 @@
 // Written by mathiasronimus
 
 int lineWhiteThreshold = 127;
+int minWhiteToSeeLine = 12800;
+double kp = 0.5; //Will need to adjust this
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
@@ -43,7 +45,43 @@ double getLineErrorSignal(int rowStart, int rowEnd) {
 	return (double) error / (rowEnd - rowStart + 1);
 }
 
+//Returns number of white pixels in image. Call take picture first.
+int numWhiteInImg() {
+	int numWhite;
+	for (int r = 0; r < 240; r++) {
+		for (int c = 0; c < 320, c++) {
+			//Loop through image
+			if (get_pixel(r, c, 3) > lineWhiteThreshold) {
+				//Pixel is white
+				numWhite++;
+			}
+		}
+	}
+	return numWhite;
+}
+
+bool canSeeLine() {
+	if (numWhiteInImg() > minWhiteToSeeLine) return true;
+	else return false;
+}
+
 //=======================Quadrant One=======================
+
+void quadOneLoop() {
+	updateWhiteThreshold();
+	bool active = true;
+	double errorSignal;
+	while(active) {
+		take_picture();	
+		if (canSeeLine()) {
+			//Robot is on track	
+			errorSignal = getLineErrorSignal(110, 130);
+			setSpeed(127 + errorSignal*kp, 127 - errorSignal*kp);
+		} else {
+			//Robot is not on track	
+		}
+	}
+}
 
 //=======================Quadrant Two=======================
 
@@ -81,5 +119,10 @@ int get_ir_reading() {
 
 int main() {
   init();
+<<<<<<< HEAD
   updateWhiteThreshold();
 };
+=======
+  quadOneLoop();
+}
+>>>>>>> d4eac23b005b8e8b468d939f269322edd7ea6d28
