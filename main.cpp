@@ -62,16 +62,24 @@ int image_analysis() {
     w = get_pixel(i, 120, 3);
     if (w > 127) {
       s = 1;
-    }
+    };
     else {
       s = 0;
-    }
+    };
     sum = sum + (i - 160) * s;
-  }
+  };
   proportional_signal = sum * kp;
-}
+};
+
+int get_ir_reading() {
+  int avg = 0;
+  for (int i = 0; i < 5; i++) {
+    avg = avg + get_adc_reading(ir_sensor_1);
+  };
+  return(avg / 5);
+};
 
 int main() {
   init();
   updateWhiteThreshold();
-}
+};
