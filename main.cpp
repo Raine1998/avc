@@ -5,6 +5,7 @@
 // Written by mathiasronimus
 
 int lineWhiteThreshold = 127;
+int minWhiteToSeeLine = 12800;
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
@@ -41,6 +42,25 @@ double getLineErrorSignal(int rowStart, int rowEnd) {
 	}
 	//Return the Average error of the rows
 	return (double) error / (rowEnd - rowStart + 1);
+}
+
+int numWhiteInImg() {
+	int numWhite;
+	for (int r = 0; r < 240; r++) {
+		for (int c = 0; c < 320, c++) {
+			//Loop through image
+			if (get_pixel(r, c, 3) > lineWhiteThreshold) {
+				//Pixel is white
+				numWhite++;
+			}
+		}
+	}
+	return numWhite;
+}
+
+bool canSeeLine() {
+	if (numWhiteInImg() > minWhiteToSeeLine) return true;
+	else return false;
 }
 
 //=======================Quadrant One=======================
