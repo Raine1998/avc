@@ -75,6 +75,16 @@ void reverseUntilSeeLine() {
 	setSpeed(0, 0);
 }
 
+void turnUntilSeeLine(bool left) {
+	if (left) setSpeed(-100, 100);
+	else setSpeed(100, -100);
+	while (!canSeeLine()) {
+		take_picture();
+		sleep1(0, loopDelay);
+	}
+	setSpeed(0, 0);
+}
+
 //=======================Quadrant One=======================
 
 void quadOneLoop() {
