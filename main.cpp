@@ -121,6 +121,14 @@ int image_analysis() {
   proportional_signal = sum * kp;
 }
 
+int get_ir() {
+  int ir = 0;
+  for (int i = 0; i < 5; i++) {
+    ir = ir + get_adc_reading(pin); //Change this
+  }
+  return(ir / 5);
+}
+
 int main() {
   init();
   quadOneLoop();
