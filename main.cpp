@@ -11,6 +11,10 @@ int loopDelay = 500000;
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
+	if (left > 254) left = 254;
+	if (left < -254) left = -254;
+	if (right > 254) right = 254;
+	if (right < -254) right = -254;
 	set_motor(0, left);
 	set_motor(1, right);
 }
