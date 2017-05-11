@@ -71,7 +71,7 @@ bool canSeeLine() {
 }
 
 void reverseUntilSeeLine() {
-	setSpeed(-100, -100);
+	setSpeed(-50, -50);
 	while (!canSeeLine()) {
 		take_picture();
 		sleep1(0, loopDelay);
