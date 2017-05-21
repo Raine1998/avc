@@ -11,10 +11,10 @@ int loopDelay = 500000;
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
-	if (left > 254) left = 254;
-	if (left < -254) left = -254;
-	if (right > 254) right = 254;
-	if (right < -254) right = -254;
+	if (left > 255) left = 255;
+	if (left < -255) left = -255;
+	if (right > 255) right = 255;
+	if (right < -255) right = -255;
 	set_motor(0, left);
 	set_motor(1, right);
 }
@@ -24,8 +24,8 @@ void updateWhiteThreshold() {
 	take_picture();
 	int totalWhite = 0;
 	//Loop through whole image
-	for (var r = 0; r < 240; r++) {
-		for (var c = 0; c < 320; c++) {
+	for (int r = 0; r < 240; r++) {
+		for (int c = 0; c < 320; c++) {
 			totalWhite += get_pixel(r, c, 3);
 		}
 	}
