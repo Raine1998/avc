@@ -154,6 +154,9 @@ void image_analysis() {
 //}
 
 int main() {
+  // Register signals
+  signal(SIGINT, stop);
+  
   init();
   quadOneLoop();
 }
