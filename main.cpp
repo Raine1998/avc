@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <signal.h>
 #include <math.h>
 #include "E101.h"
 
@@ -152,13 +153,10 @@ void image_analysis() {
 //    }
 //  }
 //}
-void stop_program() {
-  stop(1);
-};
 
 int main() {
   // Register signals
-  signal(SIGINT, stop_program);
+  signal(SIGINT, stop);
   
   init();
   quadOneLoop();
