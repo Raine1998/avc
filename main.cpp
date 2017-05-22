@@ -53,8 +53,8 @@ double getLineErrorSignal(int rowStart, int rowEnd) {
 //Returns number of white pixels in image. Call take picture first.
 int numWhiteInImg() {
 	int numWhite;
-	for (int r = 0; r < 240; r++;) {
-		for (int c = 0; c < 320; c++;) {
+	for (int r = 0; r < 240; r++) {
+		for (int c = 0; c < 320; c++) {
 			//Loop through image
 			if (get_pixel(r, c, 3) > lineWhiteThreshold) {
 				//Pixel is white
@@ -122,7 +122,7 @@ void image_analysis() {
   float kp = 0; //Change this value
   int proportional_signal = 0;
   int w, s;
-  for (int i = 0; i < 320; i++;) {
+  for (int i = 0; i < 320; i++) {
     w = get_pixel(i, 120, 3);
     if (w > 127) {
       s = 1;
@@ -143,15 +143,15 @@ void image_analysis() {
 //  return(ir / 5);
 //}
 
-void check_block(char dir[]) {
-  if (dir[] == "forward") {
-    reading = get_ir(front);
-    if (reading < thresh) {
-      set_motor(0, 0);
-      set_motor(1, 0);
-    }
-  }
-}
+//void check_block(char dir[]) {
+//  if (dir[] == "forward") {
+//    reading = get_ir(front);
+//    if (reading < thresh) {
+//      set_motor(0, 0);
+//      set_motor(1, 0);
+//    }
+//  }
+//}
 
 int main() {
   init();
