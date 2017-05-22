@@ -135,13 +135,13 @@ int image_analysis() {
   proportional_signal = sum * kp;
 }
 
-int get_ir(pin) {
-  int ir = 0;
-  for (int i = 0; i < 5; i++) {
-    ir = ir + get_adc_reading(pin); //Change this
-  }
-  return(ir / 5);
-}
+//int get_ir(pin) {
+//  int ir = 0;
+//  for (int i = 0; i < 5; i++) {
+//    ir = ir + get_adc_reading(pin); //Change this
+//  }
+//  return(ir / 5);
+//}
 
 void check_block(char dir[]) {
   if (dir[] == "forward") {
