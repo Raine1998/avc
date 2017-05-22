@@ -152,10 +152,13 @@ void image_analysis() {
 //    }
 //  }
 //}
+void stop_program() {
+  stop(1);
+};
 
 int main() {
   // Register signals
-  signal(SIGINT, stop);
+  signal(SIGINT, stop_program);
   
   init();
   quadOneLoop();
