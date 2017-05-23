@@ -7,8 +7,9 @@
 
 int lineWhiteThreshold = 127;
 int minWhiteToSeeLine = 12800;
-float kp = 0.5; //Will need to adjust this
+float kp = 0.1; //Will need to adjust this
 int loopDelay = 500000;
+int baseSpeed = 64;
 
 //=======================General Functions=======================
 void setSpeed(int left, int right) {
@@ -16,8 +17,8 @@ void setSpeed(int left, int right) {
 	if (left < -255) left = -255;
 	if (right > 255) right = 255;
 	if (right < -255) right = -255;
-	set_motor(0, left);
-	set_motor(1, right);
+	set_motor(1, left);
+	set_motor(2, right);
 }
 
 //Updates white threshold to account for variations in lighting
@@ -101,7 +102,7 @@ void quadOneLoop() {
 		if (canSeeLine()) {
 			//Robot is on track	
 			errorSignal = getLineErrorSignal(110, 130);
-			setSpeed(127 + errorSignal*kp, 127 - errorSignal*kp);
+			setSpeed(baseSpeed + errorSignal*kp, baseSpeed - errorSignal*kp);
 		} else {
 			//Robot is not on track	
 			reverseUntilSeeLine();
