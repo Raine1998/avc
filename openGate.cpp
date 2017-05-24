@@ -15,3 +15,7 @@ void openGate(){
     send_to_server(pass);
  
 }
+
+init main(){
+   openGate();
+}
